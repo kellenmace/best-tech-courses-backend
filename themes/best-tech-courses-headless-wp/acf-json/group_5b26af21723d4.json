@@ -1,0 +1,99 @@
+{
+    "key": "group_5b26af21723d4",
+    "title": "Affiliate Link Click Fields",
+    "fields": [
+        {
+            "key": "field_5b26af2bdc2d0",
+            "label": "User ID",
+            "name": "user_id",
+            "type": "user",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "role": "",
+            "allow_null": 0,
+            "multiple": 0
+        },
+        {
+            "key": "field_5b26af4edc2d1",
+            "label": "Course ID",
+            "name": "course_id",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "course"
+            ],
+            "taxonomy": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        },
+        {
+            "key": "field_5b26b2ecdc2d2",
+            "label": "DateTime",
+            "name": "datetime",
+            "type": "date_time_picker",
+            "instructions": "When the click occurred",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "F j, Y g:i a",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_5b26b3dadc2d3",
+            "label": "Discount",
+            "name": "discount",
+            "type": "text",
+            "instructions": "The amount of the course discount at the time this click occurred",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "$",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "affiliate-link-click"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1529265445
+}

@@ -1,0 +1,21 @@
+{
+    "name": "best-tech-courses/best-tech-courses",
+    "description": "Best Tech Courses core plugin",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Kellen Mace",
+            "email": "kellen.mace@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "BestTechCourses\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
+}
