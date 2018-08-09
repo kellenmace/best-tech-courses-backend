@@ -1,13 +1,16 @@
 <?php
 
 // Frontend origin
-require_once 'inc/frontend-origin.php';
+require_once __DIR__ . '/inc/frontend-origin.php';
 
 // CORS handling
-require_once 'inc/cors.php';
+require_once __DIR__ . '/inc/cors.php';
+
+// Redirect requests
+require_once __DIR__ . '/inc/redirect.php';
 
 // Media settings
-require_once 'inc/media.php';
+require_once __DIR__ . '/inc/media.php';
 
 // Logging functions
-require_once 'inc/log.php';
+require_once __DIR__ . '/inc/log.php';
