@@ -1,9 +1,7 @@
 <?php
 namespace BestTechCourses\Model;
 
-use BestTechCourses\Utilities\Hookable;
-
-class ReviewFields extends AbstractGraphQL implements Hookable, GraphQL {
+class ReviewFields extends ExposePostFields {
 
   public function register_hooks() {
     //add_filter( 'graphql_review_fields', [ $this, 'expose_custom_fields'] );

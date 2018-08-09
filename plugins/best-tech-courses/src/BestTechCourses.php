@@ -6,6 +6,7 @@ use BestTechCourses\Model\CourseFields;
 use BestTechCourses\Model\ReviewFields;
 use BestTechCourses\Model\CourseCategoryFields;
 use BestTechCourses\Model\Taxonomies;
+use BestTechCourses\Model\UserFields;
 
 /**
  * Main plugin class.
@@ -18,5 +19,6 @@ final class BestTechCourses {
     ( new ReviewFields() )->register_hooks();
     ( new CourseCategoryFields() )->register_hooks();
     ( new Taxonomies() )->register_hooks();
+    ( new UserFields() )->register_hooks();
   }
 }

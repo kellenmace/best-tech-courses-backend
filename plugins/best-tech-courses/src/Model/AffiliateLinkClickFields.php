@@ -1,37 +1,26 @@
 <?php
 namespace BestTechCourses\Model;
 
-use BestTechCourses\Utilities\Hookable;
-
-class AffiliateLinkClickFields extends AbstractGraphQL implements Hookable, GraphQL {
+class AffiliateLinkClickFields extends ExposePostFields implements ModifyPostInputFields, UpdatePostData {
 
   public function register_hooks() {
+    add_action( 'graphql_post_object_mutation_input_fields', [ $this, 'modify_input_fields' ] );
+    add_action( 'graphql_post_object_mutation_update_additional_data', [ $this, 'update_data' ] );
     add_filter( 'graphql_AffiliateLinkClick_fields', [ $this, 'expose_custom_fields'] );
-    add_action( 'graphql_post_object_mutation_input_fields', [ $this, 'register_input_fields' ] );
-    add_action( 'graphql_post_object_mutation_update_additional_data', [ $this, 'mutation_callback' ] );
-  }
-  
-  public function expose_custom_fields( $fields ) {
-    $fields['courseId'] = [
-        'type'        => \WPGraphQL\Types::string(),
-        'description' => __( 'The ID of the course', 'best-tech-courses' ),
-        'resolve'     => $this->get_custom_field_callback( 'course_id', 'absint' ),
-    ];
-
-    return $fields;
   }
 
-  public function register_input_fields( $fields, \WP_Post_Type $post_type_object ) {
+  public function modify_input_fields( $input_fields, \WP_Post_Type $post_type_object ) {
     if ( 'affiliate_link_click' === $post_type_object->name ) {
-      $fields['courseId'] = [
+      $input_fields['courseId'] = [
         'type'        => \WPGraphQL\Types::string(),
         'description' => __( 'Mutation for writing courseId to database', 'best-tech-courses' ),
       ];
     }
-    return $fields;
+
+    return $input_fields;
   }
 
-  public function mutation_callback( $post_id, $input, \WP_Post_Type $post_type_object ) {
+  public function update_data( $post_id, $input, \WP_Post_Type $post_type_object ) {
     if ( 'affiliate_link_click' !== $post_type_object->name || empty( $input['courseId'] ) ) {
       return;
     }
@@ -48,5 +37,15 @@ class AffiliateLinkClickFields extends AbstractGraphQL implements Hookable, Grap
     update_post_meta( $post_id, 'course_id', $course_id );
     update_post_meta( $post_id, 'datetime', time() );
     update_post_meta( $post_id, 'discount', $discount );
+  }
+
+  public function expose_custom_fields( $fields ) {
+    $fields['courseId'] = [
+        'type'        => \WPGraphQL\Types::string(),
+        'description' => __( 'The ID of the course', 'best-tech-courses' ),
+        'resolve'     => $this->get_custom_field_callback( 'course_id', 'absint' ),
+    ];
+
+    return $fields;
   }
 }

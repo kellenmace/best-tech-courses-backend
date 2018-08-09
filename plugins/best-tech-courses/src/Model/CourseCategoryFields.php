@@ -3,7 +3,7 @@ namespace BestTechCourses\Model;
 
 use BestTechCourses\Utilities\Hookable;
 
-class CourseCategoryFields implements Hookable, GraphQL {
+class CourseCategoryFields implements Hookable {
 
   public function register_hooks() {
     add_filter( 'graphql_CourseCategory_fields', [ $this, 'expose_custom_fields'] );

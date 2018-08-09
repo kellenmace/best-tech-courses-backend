@@ -3,7 +3,9 @@ namespace BestTechCourses\Model;
 
 use BestTechCourses\Utilities\Hookable;
 
-abstract class AbstractGraphQL implements Hookable, GraphQL {
+abstract class ExposePostFields implements Hookable {
+
+  abstract public function expose_custom_fields( $fields );
 
   protected function get_custom_field_callback( $slug, $escaping_cb ) {
     return function( \WP_Post $post ) use ( $slug, $escaping_cb ) {

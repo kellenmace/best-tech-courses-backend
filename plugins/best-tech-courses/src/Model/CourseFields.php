@@ -1,9 +1,7 @@
 <?php
 namespace BestTechCourses\Model;
 
-use BestTechCourses\Utilities\Hookable;
-
-class CourseFields extends AbstractGraphQL implements Hookable, GraphQL {
+class CourseFields extends ExposePostFields {
 
   public function register_hooks() {
     add_filter( 'graphql_course_fields', [ $this, 'expose_custom_fields'] );
