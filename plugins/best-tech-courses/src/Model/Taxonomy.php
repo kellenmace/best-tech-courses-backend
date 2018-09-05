@@ -1,40 +1,9 @@
 <?php
 namespace BestTechCourses\Model;
 
-use BestTechCourses\Utilities\Hookable;
+abstract class Taxonomy {
 
-class Taxonomies implements Hookable {
-
-  public function register_hooks() {
-    add_action( 'init', [ $this, 'register_taxonomies' ], 11 );
-  }
-
-  public function register_taxonomies() {
-    register_taxonomy(
-      'course_category',
-      'course',
-      [
-        'labels'              => $this->generate_labels( 'Category', 'Categories' ),
-        'hierarchical'        => true,
-        'show_in_graphql'     => true,
-        'show_admin_column'   => true,
-        'graphql_single_name' => 'courseCategory',
-        'graphql_plural_name' => 'courseCategories',
-      ]
-    );
-
-    register_taxonomy(
-      'status',
-      'confirmation',
-      [
-        'labels'            => $this->generate_labels( 'Approval', 'Approvals' ),
-        'hierarchical'      => true,
-        'show_admin_column' => true,
-      ]
-    );
-  }
-
-  private function generate_labels( $singular, $plural ) {
+  protected function generate_labels( $singular, $plural ) {
     return [
       'name'              => _x( $plural, 'taxonomy general name', 'best-tech-courses' ),
       'singular_name'     => _x( $singular, 'taxonomy singular name', 'best-tech-courses' ),
