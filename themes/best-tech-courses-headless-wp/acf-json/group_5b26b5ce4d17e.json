@@ -3,67 +3,6 @@
     "title": "Payment Fields",
     "fields": [
         {
-            "key": "field_5b26c3d358309",
-            "label": "User ID",
-            "name": "user_id",
-            "type": "user",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "role": "",
-            "allow_null": 0,
-            "multiple": 0
-        },
-        {
-            "key": "field_5b26c3e55830a",
-            "label": "Course ID",
-            "name": "course_id",
-            "type": "post_object",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "course"
-            ],
-            "taxonomy": [],
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1
-        },
-        {
-            "key": "field_5b26b7fb927d6",
-            "label": "Confirmation ID",
-            "name": "confirmation_id",
-            "type": "post_object",
-            "instructions": "The confirmation that justifies this payment",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "confirmation"
-            ],
-            "taxonomy": [],
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1
-        },
-        {
             "key": "field_5b26b9f2927d7",
             "label": "DateTime",
             "name": "datetime",
@@ -95,9 +34,31 @@
             },
             "default_value": "",
             "placeholder": "",
-            "prepend": "",
+            "prepend": "$",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5b26b7fb927d6",
+            "label": "Confirmation ID",
+            "name": "confirmation_id",
+            "type": "post_object",
+            "instructions": "The confirmation that justifies this payment",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "confirmation"
+            ],
+            "taxonomy": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
         }
     ],
     "location": [
@@ -117,5 +78,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1529267265
+    "modified": 1535780477
 }

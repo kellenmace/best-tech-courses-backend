@@ -3,45 +3,6 @@
     "title": "Review Fields",
     "fields": [
         {
-            "key": "field_5b26ad7928e1b",
-            "label": "User ID",
-            "name": "user_id",
-            "type": "user",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "role": "",
-            "allow_null": 0,
-            "multiple": 0
-        },
-        {
-            "key": "field_5b26ad9a28e1c",
-            "label": "Course ID",
-            "name": "course_id",
-            "type": "post_object",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "course"
-            ],
-            "taxonomy": [],
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1
-        },
-        {
             "key": "field_5b26ade328e1d",
             "label": "DateTime",
             "name": "datetime",
@@ -97,5 +58,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1529263980
+    "modified": 1535768068
 }

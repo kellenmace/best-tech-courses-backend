@@ -3,45 +3,6 @@
     "title": "Confirmation Fields",
     "fields": [
         {
-            "key": "field_5b26b4346a2ac",
-            "label": "User ID",
-            "name": "user_id",
-            "type": "user",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "role": "",
-            "allow_null": 0,
-            "multiple": 0
-        },
-        {
-            "key": "field_5b26b4566a2ad",
-            "label": "Course ID",
-            "name": "course_id",
-            "type": "post_object",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "course"
-            ],
-            "taxonomy": [],
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1
-        },
-        {
             "key": "field_5b26bb3c1b1ec",
             "label": "Affiliate Link Click ID",
             "name": "affiliate_link_click_id",
@@ -55,29 +16,7 @@
                 "id": ""
             },
             "post_type": [
-                "affiliate-link-click"
-            ],
-            "taxonomy": [],
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1
-        },
-        {
-            "key": "field_5b26b4fe6a2b0",
-            "label": "Payment ID",
-            "name": "payment_id",
-            "type": "post_object",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "payment"
+                "affiliate_link_click"
             ],
             "taxonomy": [],
             "allow_null": 0,
@@ -117,7 +56,7 @@
             },
             "default_value": "",
             "placeholder": "",
-            "prepend": "",
+            "prepend": "$",
             "append": "",
             "maxlength": ""
         },
@@ -156,5 +95,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1529266909
+    "modified": 1535779162
 }
