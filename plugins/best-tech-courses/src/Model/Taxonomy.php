@@ -3,6 +3,8 @@ namespace BestTechCourses\Model;
 
 abstract class Taxonomy {
 
+  abstract public function register_taxonomy();
+
   protected function generate_labels( $singular, $plural ) {
     return [
       'name'              => _x( $plural, 'taxonomy general name', 'best-tech-courses' ),

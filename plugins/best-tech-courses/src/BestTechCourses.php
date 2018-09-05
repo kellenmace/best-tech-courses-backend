@@ -6,7 +6,6 @@ use BestTechCourses\Model\AffiliateLinkClick;
 use BestTechCourses\Model\Review;
 use BestTechCourses\Model\Confirmation;
 use BestTechCourses\Model\Payment;
-use BestTechCourses\Model\User;
 use BestTechCourses\Model\CourseFields;
 use BestTechCourses\Model\ReviewFields;
 use BestTechCourses\Model\CourseCategoryFields;
@@ -29,7 +28,6 @@ final class BestTechCourses {
     ( new Review() )->register_hooks();
     ( new Confirmation() )->register_hooks();
     ( new Payment() )->register_hooks();
-    ( new User() )->register_hooks();
     ( new CourseFields() )->register_hooks();
     ( new ReviewFields() )->register_hooks();
     ( new CourseCategoryFields() )->register_hooks();

@@ -7,7 +7,7 @@ class UserFields implements Hookable {
 
 	public function register_hooks() {
 		add_filter( 'graphql_user_mutation_input_fields', [ $this, 'modify_input_fields' ] );
-		add_action( 'graphql_user_object_mutation_update_additional_data', [ $this, 'update_data' ], 10, 3 );
+		add_action( 'graphql_user_object_mutation_update_additional_data', [ $this, 'update_paypal_email' ], 10, 3 );
 		add_filter( 'validate_username', [ $this, 'modify_username_validation' ], 10, 2 );
 	}
 
@@ -28,14 +28,16 @@ class UserFields implements Hookable {
 		};
 	}
 
-	public function update_data( $user_id, $input, $mutation_name ) {
+	public function update_paypal_email( $user_id, $input, $mutation_name ) {
 		if ( 'register' !== $mutation_name && 'update' !== $mutation_name ) {
 			return;
 		}
 
-		if ( ! empty( $input['payPalEmail'] ) ) {
-			update_user_meta( $user_id, 'paypal_email', sanitize_email( $input['payPalEmail'] ) );
+		if ( empty( $input['payPalEmail'] ) ) {
+			return;
 		}
+
+		update_user_meta( $user_id, 'paypal_email', sanitize_email( $input['payPalEmail'] ) );
 	}
 
 	/**

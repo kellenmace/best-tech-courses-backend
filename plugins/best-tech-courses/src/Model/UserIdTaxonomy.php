@@ -5,56 +5,17 @@ use BestTechCourses\Utilities\Hookable;
 
 class UserIdTaxonomy extends Taxonomy implements Hookable {
 
-	public function register_hooks() {
-		add_action( 'init', [ $this, 'register_taxonomy' ], 11 );
-		add_action( 'admin_print_scripts', [ $this, 'require_user_id' ], 20 );
-		add_action( 'show_user_profile', [ $this, 'display_user_id_on_profile' ] );
-		add_action( 'edit_user_profile', [ $this, 'display_user_id_on_profile' ] );
-	}
+	private static $post_types = [ 'affiliate_link_click', 'review', 'confirmation', 'payment' ];
 
-	public function register_taxonomy_TEST() {
-		register_taxonomy(
-			'profession',
-			'course',
-			array(
-			'public'        =>true,
-			'single_value' => false,
-			'show_admin_column' => true,
-			'show_in_graphql'     => true,
-			'graphql_single_name' => 'userId',
-			'graphql_plural_name' => 'userIds',
-			'labels'        =>array(
-				'name'                      =>'Professions',
-				'singular_name'             =>'Profession',
-				'menu_name'                 =>'Professions',
-				'search_items'              =>'Search Professions',
-				'popular_items'             =>'Popular Professions',
-				'all_items'                 =>'All Professions',
-				'edit_item'                 =>'Edit Profession',
-				'update_item'               =>'Update Profession',
-				'add_new_item'              =>'Add New Profession',
-				'new_item_name'             =>'New Profession Name',
-				'separate_items_with_commas'=>'Separate professions with commas',
-				'add_or_remove_items'       =>'Add or remove professions',
-				'choose_from_most_used'     =>'Choose from the most popular professions',
-			),
-			'rewrite'       =>array(
-				'with_front'                =>true,
-				'slug'                      =>'author/profession',
-			),
-			'capabilities'  => array(
-				'manage_terms'              =>'edit_users',
-				'edit_terms'                =>'edit_users',
-				'delete_terms'              =>'edit_users',
-				'assign_terms'              =>'read',
-			),
-		));
+	public function register_hooks() {
+		add_action( 'init',                [ $this, 'register_taxonomy' ], 11 );
+		add_action( 'admin_print_scripts', [ $this, 'require_user_id' ], 20 );
 	}
 
 	public function register_taxonomy() {
 		register_taxonomy(
 			'user_id',
-			[ 'user', 'affiliate_link_click', 'review', 'confirmation', 'payment' ],
+			self::$post_types,
 			[
 				'labels'              => $this->generate_labels( 'User ID', 'User ID' ),
 				'hierarchical'        => true,
@@ -63,7 +24,6 @@ class UserIdTaxonomy extends Taxonomy implements Hookable {
 				'show_in_graphql'     => true,
 				'graphql_single_name' => 'userId',
 				'graphql_plural_name' => 'userIds',
-				'update_count_callback' => 'km_user_taxonomies_update_count'
 			]
 		);
 	}
@@ -116,36 +76,6 @@ class UserIdTaxonomy extends Taxonomy implements Hookable {
 	}
 
 	private function does_post_type_require_user_id() {
-		return in_array( get_post_type(), [ 'affiliate_link_click', 'review', 'confirmation', 'payment' ], true );
-	}
-
-	public function display_user_id_on_profile( $user ) {
-		?>
-		<table class="form-table">
-			<tbody>
-				<tr class="acf-field">
-					<td class="acf-label">
-						<label for="user-id-term">User ID</label>
-					</td>
-					<td class="acf-input">
-						<div class="acf-input-wrap">
-							<input
-								type="text"
-								id="user-id-term"
-								name="user-id-term"
-								value="<?php echo esc_html( $this->get_user_id_term_name( $user ) ); ?>"
-								disabled
-							/>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<?php
-	}
-
-	private function get_user_id_term_name( $user ) {
-		$user_ids = wp_get_object_terms( $user->ID, 'user_id' );
-		return $user_ids && is_array( $user_ids ) ? $user_ids[0]->name : '';
+		return in_array( get_post_type(), self::$post_types, true );
 	}
 }

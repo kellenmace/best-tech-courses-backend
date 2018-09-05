@@ -5,6 +5,8 @@ use BestTechCourses\Utilities\Hookable;
 
 class CourseIdTaxonomy extends Taxonomy implements Hookable {
 
+	private static $post_types = [ 'affiliate_link_click', 'review', 'confirmation' ];
+
 	public function register_hooks() {
 		add_action( 'init', [ $this, 'register_taxonomy' ], 11 );
 		add_action( 'admin_print_scripts', [ $this, 'require_course_id' ], 20 );
@@ -13,14 +15,14 @@ class CourseIdTaxonomy extends Taxonomy implements Hookable {
 	public function register_taxonomy() {
 		register_taxonomy(
 			'course_id',
-			[ 'course', 'affiliate_link_click', 'review', 'confirmation' ],
+			self::$post_types,
 			[
 				'labels'              => $this->generate_labels( 'Course ID', 'Course ID' ),
 				'hierarchical'        => true,
 				'show_in_graphql'     => true,
 				'show_admin_column'   => true,
 				'graphql_single_name' => 'courseId',
-				'graphql_plural_name' => 'courseId',
+				'graphql_plural_name' => 'courseIds',
 			]
 		);
 	}
@@ -73,6 +75,6 @@ class CourseIdTaxonomy extends Taxonomy implements Hookable {
 	}
 
 	private function does_post_type_require_course_id() {
-		return in_array( get_post_type(), [ 'affiliate_link_click', 'review', 'confirmation' ], true );
+		return in_array( get_post_type(), self::$post_types, true );
 	}
 }

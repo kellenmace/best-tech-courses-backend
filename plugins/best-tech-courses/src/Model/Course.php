@@ -5,7 +5,6 @@ class Course extends CustomPostType {
 
 	public function register_hooks() {
 		add_action( 'init', [ $this, 'register' ] );
-		add_action( 'save_post_course', [ $this, 'set_course_id' ] );
 		add_filter( 'manage_course_posts_columns' , [ $this, 'modify_admin_columns' ] );
 		add_action( 'manage_course_posts_custom_column' , [ $this, 'render_discount_column' ], 10, 2 );
 	}
@@ -21,10 +20,6 @@ class Course extends CustomPostType {
 			'graphql_single_name' => 'course',
 			'graphql_plural_name' => 'courses',
 		] );
-	}
-
-	public function set_course_id( $post_ID ) {
-		wp_set_object_terms( $post_ID, (string) $post_ID, 'course_id' );
 	}
 
 	public function modify_admin_columns( $old_columns ) {
