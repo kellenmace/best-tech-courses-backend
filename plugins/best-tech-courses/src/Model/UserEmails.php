@@ -14,7 +14,7 @@ class UserEmails implements Hookable {
 		add_filter( 'wp_mail_from_name', [ $this, 'modify_mail_from_name' ] );
 		add_filter( 'wp_mail_from', [ $this, 'modify_mail_from_address' ] );
 		add_filter( 'wp_new_user_notification_email', [ $this, 'modify_new_user_mail' ], 10, 2 );
-		add_filter( 'retrieve_password_title', [ $this, 'modify_email_reset_subject'], 10, 4 );
+		add_filter( 'retrieve_password_title', [ $this, 'modify_email_reset_subject'] );
 		add_filter( 'retrieve_password_message', [ $this, 'modify_email_reset_message' ], 10, 4 );
 	}
 
@@ -35,26 +35,26 @@ class UserEmails implements Hookable {
 	}
 
 	public function modify_new_user_mail( $wp_new_user_notification_email, $user ) {
-		$url     = $this->get_password_reset_url( $this->password_key, $user->user_login );
-		$message = "Hey – thanks for signing up for Best Tech Courses! 🙌🏼\r\n\r\n"; // String contains a raised hands emoji.
-		$message .= "You can set a password for your shiny new account here:\r\n{$url}";
-
 		$wp_new_user_notification_email['subject'] = __( '⭐️ %s – Confirm your Account' ); // String contains a star emoji.
-		$wp_new_user_notification_email['message'] = $message;
+		$wp_new_user_notification_email['message'] = $this->get_new_user_email_message();
 
 		return $wp_new_user_notification_email;
 	}
 
-	public function modify_email_reset_subject( $title, $user_login, $user_data ) {
-		$site_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+	private function get_new_user_email_message() {
+		$url     = $this->get_password_reset_url( $this->password_key, $user->user_login );
+		$message = "Hey – thanks for signing up for Best Tech Courses! 🙌🏼\r\n\r\n"; // String contains a raised hands emoji.
+		$message .= "You can set a password for your shiny new account here:\r\n{$url}";
 
-		return sprintf( __( '⭐️ %s – Password Reset' ), $site_name ); // String contains a star emoji.
+		return $message;
+	}
+
+	public function modify_email_reset_subject() {
+		return sprintf( __( '⭐️ %s – Password Reset' ), $this->get_site_name() ); // String contains a star emoji.
 	}
 
 	public function modify_email_reset_message( $message, $key, $user_login, $user_data ) {
-		$site_name = $this->get_site_name();
-
-		$message = __( "A password reset has been requested for the following {$site_name} account: {$user_data->user_email}." ) . "\r\n\r\n";
+		$message = __( "A password reset has been requested for the following {$this->get_site_name()} account: {$user_data->user_email}." ) . "\r\n\r\n";
 		$message .= __( 'If you didn\'t request a password reset, you can safely ignore this email.' ) . "\r\n\r\n";
 		$message .= __( 'You can reset your password here:' ) . "\r\n";
 		$message .= $this->get_password_reset_url( $key, $user_login );
