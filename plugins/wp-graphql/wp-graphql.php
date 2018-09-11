@@ -5,7 +5,7 @@
  * Description: GraphQL API for WordPress
  * Author: WPGraphQL
  * Author URI: http://www.wpgraphql.com
- * Version: 0.0.28
+ * Version: 0.0.32
  * Text Domain: wp-graphql
  * Domain Path: /languages/
  * Requires at least: 4.7.0
@@ -14,10 +14,11 @@
  * License: GPL-3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  *
+ *
  * @package  WPGraphQL
  * @category Core
  * @author   WPGraphQL
- * @version  0.0.28
+ * @version  0.0.32
  */
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -152,7 +153,7 @@ if ( ! class_exists( 'WPGraphQL' ) ) :
 
 			// Plugin version.
 			if ( ! defined( 'WPGRAPHQL_VERSION' ) ) {
-				define( 'WPGRAPHQL_VERSION', '0.0.28' );
+				define( 'WPGRAPHQL_VERSION', '0.0.32' );
 			}
 
 			// Plugin Folder Path.
@@ -242,17 +243,37 @@ if ( ! class_exists( 'WPGraphQL' ) ) :
 			add_action( 'wp_loaded', [ $this, 'maybe_flush_permalinks' ] );
 
 			/**
-			 * Register default settings available in WordPress so we can use
-			 * the get_registered_settings method
-			 *
-			 * @source https://github.com/WordPress/WordPress/blob/master/wp-includes/default-filters.php#L393
-			 */
-			add_action( 'do_graphql_request', 'register_initial_settings', 10 );
-
-			/**
 			 * Hook in before fields resolve to check field permissions
 			 */
 			add_action( 'graphql_before_resolve_field', [ '\WPGraphQL\Utils\InstrumentSchema', 'check_field_permissions' ], 10, 8 );
+
+			/**
+			 * Determine what to show in graphql
+			 */
+			add_action( 'do_graphql_request', 'register_initial_settings', 10 );
+			add_action( 'init_graphql_request', [ $this, 'setup_types' ], 10 );
+
+		}
+
+		/**
+		 * Determine the post_types and taxonomies, etc that should show in GraphQL
+		 */
+		public function setup_types() {
+
+			/**
+			 * Only do this if we're in the context of a GraphQL request (note, this doesn't
+			 * mean just an HTTP request, but even an internal request via "do_graphql_request")
+			 */
+			if ( defined( 'GRAPHQL_REQUEST' ) && true === GRAPHQL_REQUEST ) {
+
+				/**
+				 * Setup the settings, post_types and taxonomies to show_in_graphql
+				 */
+				\WPGraphQL::show_in_graphql();
+				\WPGraphQL::get_allowed_post_types();
+				\WPGraphQL::get_allowed_taxonomies();
+
+			}
 
 		}
 
@@ -550,6 +571,7 @@ if ( ! class_exists( 'WPGraphQL' ) ) :
 		 */
 		public static function do_graphql_request( $request, $operation_name = '', $variables = '' ) {
 
+
 			/**
 			 * Whether it's a GraphQL Request (http or internal)
 			 *
@@ -560,11 +582,9 @@ if ( ! class_exists( 'WPGraphQL' ) ) :
 			}
 
 			/**
-			 * Setup the post_types and taxonomies to show_in_graphql
+			 * Action – intentionally with no context – to indicate a GraphQL Request has started
 			 */
-			\WPGraphQL::show_in_graphql();
-			\WPGraphQL::get_allowed_post_types();
-			\WPGraphQL::get_allowed_taxonomies();
+			do_action( 'init_graphql_request' );
 
 			/**
 			 * Store the global post so it can be reset after GraphQL execution
@@ -731,17 +751,19 @@ if ( ! class_exists( 'WPGraphQL' ) ) :
 	}
 endif;
 
-/**
- * Function that instantiates the plugins main class
- *
- * @since 0.0.1
- */
-function graphql_init() {
-
+if ( ! function_exists( 'graphql_init' ) ) {
 	/**
-	 * Return an instance of the action
+	 * Function that instantiates the plugins main class
+	 *
+	 * @since 0.0.1
 	 */
-	return \WPGraphQL::instance();
+	function graphql_init() {
+
+		/**
+		 * Return an instance of the action
+		 */
+		return \WPGraphQL::instance();
+	}
 }
 graphql_init();
 
