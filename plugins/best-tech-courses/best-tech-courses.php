@@ -21,5 +21,4 @@ if ( ! is_readable( $autoload ) ) {
 
 require_once $autoload;
 
-$plugin = new BestTechCourses\BestTechCourses();
-$plugin->run();
+( new BestTechCourses\BestTechCourses() )->run();
