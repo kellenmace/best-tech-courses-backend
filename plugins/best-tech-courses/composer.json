@@ -13,9 +13,6 @@
     "autoload": {
         "psr-4": {
             "BestTechCourses\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     }
 }

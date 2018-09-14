@@ -1,21 +1,22 @@
 <?php
 namespace BestTechCourses;
 
-use BestTechCourses\Model\Course;
-use BestTechCourses\Model\AffiliateLinkClick;
-use BestTechCourses\Model\Review;
-use BestTechCourses\Model\Confirmation;
-use BestTechCourses\Model\Payment;
-use BestTechCourses\Model\CourseFields;
-use BestTechCourses\Model\ReviewFields;
-use BestTechCourses\Model\CourseCategoryFields;
-use BestTechCourses\Model\CourseCategory;
-use BestTechCourses\Model\CourseIdTaxonomy;
-use BestTechCourses\Model\UserIdTaxonomy;
-use BestTechCourses\Model\ConfirmationStatusTaxonomy;
-use BestTechCourses\Model\TaxonomyLabel;
-use BestTechCourses\Model\UserFields;
-use BestTechCourses\Model\UserEmails;
+use BestTechCourses\Core\Course;
+use BestTechCourses\Core\AffiliateLinkClick;
+use BestTechCourses\Core\Review;
+use BestTechCourses\Core\Confirmation;
+use BestTechCourses\Core\Payment;
+use BestTechCourses\Core\CourseFields;
+use BestTechCourses\Core\ReviewFields;
+use BestTechCourses\Core\AffiliateLinkClickFields;
+use BestTechCourses\Core\CourseCategoryFields;
+use BestTechCourses\Core\CourseCategory;
+use BestTechCourses\Core\CourseIdTaxonomy;
+use BestTechCourses\Core\UserIdTaxonomy;
+use BestTechCourses\Core\ConfirmationStatusTaxonomy;
+use BestTechCourses\Core\TaxonomyLabel;
+use BestTechCourses\Core\UserFields;
+use BestTechCourses\Core\UserEmails;
 
 /**
  * Main plugin class.
@@ -30,6 +31,7 @@ final class BestTechCourses {
     ( new Payment() )->register_hooks();
     ( new CourseFields() )->register_hooks();
     ( new ReviewFields() )->register_hooks();
+    ( new AffiliateLinkClickFields() )->register_hooks();
     ( new CourseCategoryFields() )->register_hooks();
     ( new CourseCategory() )->register_hooks();
     ( new CourseIdTaxonomy() )->register_hooks();
