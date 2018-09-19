@@ -9,15 +9,15 @@ abstract class Taxonomy {
     return [
       'name'              => _x( $plural, 'taxonomy general name', 'best-tech-courses' ),
       'singular_name'     => _x( $singular, 'taxonomy singular name', 'best-tech-courses' ),
-      'search_items'      => __( "Search {$plural}", 'best-tech-courses' ),
-      'all_items'         => __( "All {$plural}", 'best-tech-courses' ),
-      'parent_item'       => __( "Parent {$singular}", 'best-tech-courses' ),
-      'parent_item_colon' => __( "Parent {$singular}:", 'best-tech-courses' ),
-      'edit_item'         => __( "Edit {$singular}", 'best-tech-courses' ),
-      'update_item'       => __( "Update {$singular}", 'best-tech-courses' ),
-      'add_new_item'      => __( "Add New {$singular}", 'best-tech-courses' ),
-      'new_item_name'     => __( "New {$singular} Name", 'best-tech-courses' ),
-      'menu_name'         => __( $plural, 'best-tech-courses' ),
+      'search_items'      => sprintf( __( 'Search %s', 'best-tech-courses' ), $plural ),
+      'all_items'         => sprintf( __( 'All %s', 'best-tech-courses' ), $plural ),
+      'parent_item'       => sprintf( __( 'Parent %s', 'best-tech-courses' ), $singular ),
+      'parent_item_colon' => sprintf( __( 'Parent %s:', 'best-tech-courses' ), $singular ),
+      'edit_item'         => sprintf( __( 'Edit %s:', 'best-tech-courses' ), $singular ),
+      'update_item'       => sprintf( __( 'Update %s:', 'best-tech-courses' ), $singular ),
+      'add_new_item'      => sprintf( __( 'Add New %s:', 'best-tech-courses' ), $singular ),
+      'new_item_name'     => sprintf( __( 'New %s Name', 'best-tech-courses' ), $singular ),
+      'menu_name'         => $plural,
     ];
   }
 }
