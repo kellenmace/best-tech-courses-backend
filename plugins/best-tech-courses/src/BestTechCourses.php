@@ -8,7 +8,6 @@ use BestTechCourses\Core\Confirmation;
 use BestTechCourses\Core\Payment;
 use BestTechCourses\Core\CourseFields;
 use BestTechCourses\Core\ReviewFields;
-use BestTechCourses\Core\AffiliateLinkClickFields;
 use BestTechCourses\Core\CourseCategoryFields;
 use BestTechCourses\Core\CourseCategory;
 use BestTechCourses\Core\CourseIdTaxonomy;
@@ -31,7 +30,6 @@ final class BestTechCourses {
     ( new Payment() )->register_hooks();
     ( new CourseFields() )->register_hooks();
     ( new ReviewFields() )->register_hooks();
-    ( new AffiliateLinkClickFields() )->register_hooks();
     ( new CourseCategoryFields() )->register_hooks();
     ( new CourseCategory() )->register_hooks();
     ( new CourseIdTaxonomy() )->register_hooks();

@@ -15,7 +15,7 @@ class ConfirmationStatusTaxonomy extends Taxonomy implements Hookable {
 			'status',
 			'confirmation',
 			[
-				'labels'            => $this->generate_labels( 'Status', 'Status' ),
+				'labels'            => $this->generate_labels( 'Status', 'Statuses' ),
 				'hierarchical'      => true,
 				'show_admin_column' => true,
 			]

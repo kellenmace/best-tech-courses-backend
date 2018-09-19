@@ -7,7 +7,7 @@
             "label": "DateTime",
             "name": "datetime",
             "type": "date_time_picker",
-            "instructions": "When the click occurred",
+            "instructions": "When the click occurred. Saves in YYYY-MM-DD HH:MM:SS format, in the site's local timezone.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -56,5 +56,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1535742346
+    "modified": 1537290819
 }
