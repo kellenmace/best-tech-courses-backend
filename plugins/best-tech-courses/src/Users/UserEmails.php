@@ -1,5 +1,5 @@
 <?php
-namespace BestTechCourses\Core;
+namespace BestTechCourses\Users;
 
 use BestTechCourses\Interfaces\Hookable;
 
@@ -10,12 +10,12 @@ class UserEmails implements Hookable {
 	private $site_name = '';
 
 	public function register_hooks() {
-		add_action( 'retrieve_password_key', [ $this, 'set_password_key' ], 10, 2 );
-		add_filter( 'wp_mail_from_name', [ $this, 'modify_mail_from_name' ] );
-		add_filter( 'wp_mail_from', [ $this, 'modify_mail_from_address' ] );
+		add_action( 'retrieve_password_key',          [ $this, 'set_password_key' ], 10, 2 );
+		add_filter( 'wp_mail_from_name',              [ $this, 'modify_mail_from_name' ] );
+		add_filter( 'wp_mail_from',                   [ $this, 'modify_mail_from_address' ] );
 		add_filter( 'wp_new_user_notification_email', [ $this, 'modify_new_user_mail' ], 10, 2 );
-		add_filter( 'retrieve_password_title', [ $this, 'modify_email_reset_subject'] );
-		add_filter( 'retrieve_password_message', [ $this, 'modify_email_reset_message' ], 10, 4 );
+		add_filter( 'retrieve_password_title',        [ $this, 'modify_email_reset_subject'] );
+		add_filter( 'retrieve_password_message',      [ $this, 'modify_email_reset_message' ], 10, 4 );
 	}
 
 	public function set_password_key( $user_login, $key ) {
